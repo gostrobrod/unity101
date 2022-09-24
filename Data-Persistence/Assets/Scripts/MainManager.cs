@@ -7,13 +7,14 @@ using System.IO;
 
 public class MainManager : MonoBehaviour
 {
-    public MainManager shared;
+    static public MainManager shared;
 
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -56,6 +57,9 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        if (BestScoreText && BestScoreText.text == "") {
+            BestScoreText.text = $"Best score: 0 ({PlayerName})";
+        }
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -73,7 +77,7 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(0);
             }
         }
     }
