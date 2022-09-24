@@ -7,6 +7,8 @@ using System.IO;
 
 public class MainManager : MonoBehaviour
 {
+    public MainManager shared;
+
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -20,6 +22,18 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    public void setPlayerName(string newName) {
+        PlayerName = newName;
+    }
+
+    void Awake()
+    {
+        if (shared) {
+            return;
+        }
+        shared = new  MainManager();
+        DontDestroyOnLoad(this.gameObject);
+    }
     
     // Start is called before the first frame update
     void Start()
